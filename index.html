@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Developer Portfolio</title>
+  <style>
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      transition: background-color 0.5s, color 0.5s;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--navbar-bg-color);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 24px;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    .navbar-links {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .navbar-link {
+      margin-left: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-top: 100px;
+    }
+
+    .hero img {
+      width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project {
+      background-color: var(--project-bg-color);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .project img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .about-me {
+      margin-bottom: 40px;
+    }
+
+    .contact {
+      margin-bottom: 40px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .contact-form button {
+      padding: 10px 20px;
+      background-color: var(--button-bg-color);
+      color: var(--button-text-color);
+      border: none;
+      cursor: pointer;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-label {
+      margin-right: 10px;
+    }
+
+    .toggle-input {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .toggle-input input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--slider-bg-color);
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: var(--thumb-color);
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    .toggle-input input:checked + .toggle-slider {
+      background-color: var(--slider-bg-color);
+    }
+
+    .toggle-input input:focus + .toggle-slider {
+      box-shadow: 0 0 1px var(--slider-bg-color);
+    }
+
+    .toggle-input input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="navbar-brand">Web Developer Portfolio</a>
+    <ul class="navbar-links">
+      <li class="navbar-link"><a href="#">Home</a></li>
+      <li class="navbar-link"><a href="#">Projects</a></li>
+      <li class="navbar-link"><a href="#">About</a></li>
+      <li class="navbar-link"><a href="#">Contact</a></li>
+    </ul>
+    <div class="toggle-container">
+      <span class="toggle-label">Toggle</span>
+      <label class="toggle-input">
+        <input type="checkbox" onchange="toggleTheme()" id="themeToggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <img src="your-profile-picture.jpg" alt="Profile Picture">
+      <h1>Your Name</h1>
+      <p>Web Developer</p>
+    </div>
+
+    <section class="projects">
+      <div class="project">
+        <img src="project1-image.jpg" alt="Project 1 Image">
+        <h3>Project 1</h3>
+        <p>Description of project 1</p>
+      </div>
+      <div class="project">
+        <img src="project2-image.jpg" alt="Project 2 Image">
+        <h3>Project 2</h3>
+        <p>Description of project 2</p>
+      </div>
+      <div class="project">
+        <img src="project3-image.jpg" alt="Project 3 Image">
+        <h3>Project 3</h3>
+        <p>Description of project 3</p>
+      </div>
+      <div class="project">
+        <img src="project4-image.jpg" alt="Project 4 Image">
+        <h3>Project 4</h3>
+        <p>Description of project 4</p>
+      </div>
+    </section>
+
+    <section class="about-me">
+      <h2>About Me</h2>
+      <p>Write a brief description about yourself here.</p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <form class="contact-form">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const themeToggle = document.getElementById("themeToggle");
+
+    function setTheme(mode) {
+      const root = document.documentElement;
+      if (mode === 'dark') {
+        root.style.setProperty('--background-color', '#333');
+        root.style.setProperty('--text-color', '#fff');
+        root.style.setProperty('--project-bg-color', '#444');
+        root.style.setProperty('--navbar-bg-color', '#222');
+        root.style.setProperty('--button-bg-color', '#444');
+        root.style.setProperty('--button-text-color', '#fff');
+        root.style.setProperty('--slider-bg-color', '#999');
+        root.style.setProperty('--thumb-color', '#fff');
+      } else {
+        root.style.setProperty('--background-color', '#fff');
+        root.style.setProperty('--text-color', '#333');
+        root.style.setProperty('--project-bg-color', '#f4f4f4');
+        root.style.setProperty('--navbar-bg-color', '#f8f8f8');
+        root.style.setProperty('--button-bg-color', '#007bff');
+        root.style.setProperty('--button-text-color', '#fff');
+        root.style.setProperty('--slider-bg-color', '#ccc');
+        root.style.setProperty('--thumb-color', '#fff');
+      }
+    }
+
+    if (prefersDarkMode) {
+      setTheme('dark');
+      themeToggle.checked = true;
+    }
+
+    // Toggle between light and dark mode
+    function toggleTheme() {
+      if (themeToggle.checked) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    }
+  </script>
+</body>
+</html>
